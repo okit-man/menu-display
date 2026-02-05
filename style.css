@@ -120,7 +120,11 @@ button:hover {
         margin: 3rem 3rem;
     }
     .menu-button {
-        gap: 11px;
+        gap: 10px;
+    }
+    button {
+        padding: 5px 6px;
+        font-size: 0.85rem;
     }
      .menu-item {
         flex-direction: column;
@@ -128,13 +132,8 @@ button:hover {
         text-align: center;
     }
      .photo {
-        width: 100%;
+        width: 120%;
         height: 300px;
-    }
-    .menu-info header {
-        /* flex-direction: column; */
-        /* gap: 0.3rem; */
-        /* align-items: center; */
     }
      .menu-text {
         font-size: 0.85rem;
