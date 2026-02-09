@@ -6,7 +6,7 @@ const meunItems = [
         category: "lunch",
         price: 10.99,
         img: "./Eba.jpeg",
-        menuText: `Eba is a starch ball that’s often served as a side dish for soup. Also called garri, eba is made from refined cassava flour and water. It’s often served with a variety of soups, such as egusi soup, okra soup, and vegetable soup.`,
+        menuText: `Eba is often served as a side dish for soup. Also called garri, eba is made from refined cassava flour and water. It’s often served with a variety of soups, such as egusi soup, okra soup, and vegetable soup.`,
         
     },
     {
@@ -44,7 +44,7 @@ const meunItems = [
     {
         id: 6,
         menuHeading: "Efo riro",
-        category: "breakfast",
+        category: "lunch",
         price: 9.99,
         img: "./efo.jpg",
         menuText: `means “vegetable soup,” which many Nigerian families make as a spinach stew. Originally a traditional Yoruba dish, efo riro often includes pumpkin leaves, tomatoes, onions, and proteins like dry fish or crayfish.`,
@@ -55,12 +55,12 @@ const meunItems = [
         category: "dinner",
         price: 20.99,
         img: "./pepersoup.jpg",
-        menuText: `It’s usually prepared with meats like goat, chicken, or fish, and the soup is served piping hot, often as a remedy for colds or simply as comfort food.Pepper soup is traditionally served at Nigerian gatherings, celebrations, and wakes.`,
+        menuText: `It’s usually prepared with meats like goat, chicken, or fish, and the soup is served piping hot, often as a remedy for colds or simply as comfort food.Pepper soup is traditionally served at Nigerian gatherings, celebrations.`,
     },
      {
         id: 8,
         menuHeading: "pizza",
-        category: "dinner",
+        category: "shakes",
         price: 12.99,
         img: "./pizza.jpg",
         menuText: `A popular Italian dish made with a thin crust, tomato sauce, and cheese. Toppings can include pepperoni, mushrooms, olives, and more.`,
@@ -68,7 +68,7 @@ const meunItems = [
      {
         id: 9,
         menuHeading: "Puff Puff",
-        category: "lunch",
+        category: "shakes",
         price: 2.99,
         img: "./puffpuff.jpg",
         menuText: `Puff puff is a popular snack in Nigeria, often sold by street vendors. It’s made from a simple batter of flour, sugar, yeast, and water, then deep-fried until golden brown.These sweet, doughy balls are a staple at parties, celebrations, and street markets, making them a beloved snack for Nigerians of all ages.`,
@@ -78,7 +78,7 @@ const meunItems = [
         menuHeading: "Ewedu soup",
         category: "dinner",
         price: 9.99,
-        img: "./okoro.jpeg",
+        img: "./ewedu.jpeg",
         menuText: `Ewedu soup is a dish that comes from the Yoruba people of Nigeria. This vibrant green soup is made from jute leaves, which give it a thick and slimy mouthfeel, not unlike okra soup. br> Ewedu often includes egusi, crayfish, and locust beans. Consider pairing it with amala.`,
     },
       {
@@ -93,12 +93,75 @@ const meunItems = [
 
 const senctionCenter = document.querySelector('.senction-center');
 
+const filterBtns = document.querySelectorAll('.filter-btn')
+
+
+// display item
 window.addEventListener('DOMContentLoaded', function() {
     // console.log('show amd seen');
-    let displaymenu = meunItems.map(function(arrey) {
+    // let displaymenu = meunItems.map(function(arrey) {
         // console.log(arrey);
+    //     return`
+    //      <article class="menu-item">
+    //         <img src= ${arrey.img} alt=${arrey.menuHeading} class="photo">
+    //             <div class="menu-info">
+    //                 <header>
+    //                     <h4 class="menu-heading">${arrey.menuHeading}</h4>
+    //                     <h4 class="price">$${arrey.price}</h4>
+    //                 </header>
+    //                 <p class="menu-text">${arrey.menuText}</p>
+    //             </div>
+    //         </article>`
         
-        return`
+    // });
+    // displaymenu = displaymenu.join('')
+    // // console.log(displaymenu);
+    // senctionCenter.innerHTML = displaymenu
+
+    displayMenuItem(meunItems);
+});
+
+// filter buttons
+filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function(e) {
+        // e.preventDefault();
+        // console.log(e.currentTarget.dataset.id.trim().toLowerCase());
+        const category = e.currentTarget.dataset.id;
+        // const category = e.currentTarget.dataset.id.trim().toLowerCase();
+
+        // if(category === "all") {
+        //     displayMenuItem(meunItems);
+        //     return;
+        // }
+
+        // const menuCategory = meunItems.filter(function (menuItem) {
+        //     return menuItem.category === category;
+        // });       
+        // displayMenuItem(menuCategory);
+
+        
+        const menuCategory = meunItems.filter(function (menuItem) {
+            // console.log(meunItem.category);
+            if(menuItem.category === category) {
+                return menuItem;
+            }
+        });
+        // console.log(menuCategory);
+        if (category === "all") {
+            displayMenuItem(meunItems);
+        }
+        else {
+            displayMenuItem(menuCategory);
+        };
+    });
+});
+
+
+
+
+function displayMenuItem (foodMenu) {
+    let displaymenu = foodMenu.map(function (arrey) {
+        return `
          <article class="menu-item">
             <img src= ${arrey.img} alt=${arrey.menuHeading} class="photo">
                 <div class="menu-info">
@@ -109,10 +172,9 @@ window.addEventListener('DOMContentLoaded', function() {
                     <p class="menu-text">${arrey.menuText}</p>
                 </div>
             </article>`
-        
+
     });
-    displaymenu = displaymenu.join('')
+    displaymenu = displaymenu.join('');
     // console.log(displaymenu);
-    senctionCenter.innerHTML = displaymenu
-    
-})
+    senctionCenter.innerHTML = displaymenu;
+}
